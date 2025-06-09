@@ -1,11 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dice Roller</title>
+  <style>
+    .img-dice {
+      height: 200px;
+      margin-bottom: 50px;
+      transition: transform 0.2s ease;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .btn {
+      color: white;
+      background-color: rgb(2, 155, 2);
+      border-radius: 10px;
+      font-size: larger;
+      padding: 10px;
+      box-shadow: 0 5px 0 0 yellow;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      font-size: 20px;
+    }
+
+    /* Animation */
+    @keyframes shake {
+      0% { transform: rotate(0deg); }
+      20% { transform: rotate(20deg); }
+      40% { transform: rotate(-20deg); }
+      60% { transform: rotate(10deg); }
+      80% { transform: rotate(-10deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    .shake {
+      animation: shake 0.5s;
+    }
+  </style>
 </head>
 <body>
-    <h1>hi</h1>
+  <div class="container">
+    <img src="dice.png" alt="Dice" class="img-dice" id="dice">
+    <button onclick="roll()" class="btn">Roll Dice</button>
+  </div>
+
+  <script>
+    function roll() {
+      const diceImg = document.getElementById("dice");
+      const min = 1;
+      const max = 6;
+      const random = Math.floor(Math.random() * (max - min + 1)) + min;
+
+      // Add shake animation
+      diceImg.classList.add("shake");
+
+      // Remove animation class after it finishes
+      setTimeout(() => {
+        diceImg.classList.remove("shake");
+
+        // Update dice image
+        switch(random) {
+          case 1: diceImg.src = "dice.png"; break;
+          case 2: diceImg.src = "dice (1).png"; break;
+          case 3: diceImg.src = "dice (2).png"; break;
+          case 4: diceImg.src = "dice (3).png"; break;
+          case 5: diceImg.src = "dice (4).png"; break;
+          case 6: diceImg.src = "dice (5).png"; break;
+        }
+      }, 500); // match animation duration
+    }
+  </script>
 </body>
 </html>
